@@ -8,11 +8,11 @@ import (
 )
 
 func GetConnection() *sql.DB {
-	db, err := sql.Open("mysql", "root:@tcp(localhost:3306)/learn_go_database")
+	db, err := sql.Open("mysql", "root:bismillah,.@tcp(localhost:3306)/learn_go_database")
 	if err != nil {
 		panic(err.Error())
 	}
-	// Jangan di defer, nanti langsung ditutup, kecuali bikin WaitGroup
+	// Jangan di defer, nanti langsung ditutup,
 	// defer db.Close()
 
 	db.SetMaxIdleConns(10)
