@@ -20,5 +20,7 @@
 - `SetConnMaxLifetime(duration)`, Mengatur seeberapa lama koneksi dapat digunakan
 
 ## Eksekusi Perintah SQL
-- Di Go Lang, terdapat function `(DB) ExecContext(context, sql, params)` yang dapat digunakan untuk mengirim perintah SQL
+- Di Go Lang, terdapat function `(DB) ExecContext(context, query, params)` yang dapat digunakan untuk mengirim perintah SQL yang tidak mengembalikan data. Cth: insert dll
 - Terdapat `context` sebagai parameter, sehingga dapat mengirim sinyal cancel jika ingin membatalkan perintah SQL
+- `(DB) QueryContext(context, query, params)(rows, err)`, untuk mengirim perintah sql yang mengembalikan data. Cth: select
+  - rows disarankan diClose menggunakan `rows.Close()`
