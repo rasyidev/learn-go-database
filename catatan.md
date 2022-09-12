@@ -24,3 +24,12 @@
 - Terdapat `context` sebagai parameter, sehingga dapat mengirim sinyal cancel jika ingin membatalkan perintah SQL
 - `(DB) QueryContext(context, query, params)(rows, err)`, untuk mengirim perintah sql yang mengembalikan data. Cth: select
   - rows disarankan diClose menggunakan `rows.Close()`
+
+## Tipe Data Column dan Representasi pada Go Lang
+**Tipe data database -> tipe data Go Lang**
+- VARCHAR, CHAR -> string
+- INT, BIGINT -> int32, int64
+- FLOAT, DOUBLE -> float32, float64
+- BOOLEAN -> bool
+- DATE, DATETIME, TIME, TIMESTAMP -> time.Time
+
