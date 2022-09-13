@@ -32,6 +32,8 @@ func TestSQLInjection(t *testing.T) {
 
 /*
 $ go test -v -run TestSQLInjection
+username: admin
+password: admin
 === RUN   TestSQLInjection
 SELECT username, password FROM users WHERE username='admin'; #' AND password='ngawur' LIMIT 1
 Berhasil Login
