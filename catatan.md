@@ -54,3 +54,23 @@ panic: sql: Scan error on column index 2, name "email": converting NULL to strin
 
 **Tipe Data Nullable package `sql`**
 - string -> `database.sql.NullString`
+
+## SQL Injection
+- Teknik menyalahgunakan celah keamanan dalam lapisan database aplikasi
+- Dilakukan dengan mengirim input dari user dengan perintah yg salah (tidak sesuai dengan hasil SQL yang ada di program aplikasi)
+- Sangat berbahaya
+
+```bash
+$ go test -v -run TestSQLInjection
+=== RUN   TestSQLInjection
+SELECT username, password FROM users WHERE username='admin'; #' AND password='ngawur' LIMIT 1
+Berhasil Login
+--- PASS: TestSQLInjection (0.02s)
+PASS
+ok      learn-go-database       0.074s
+```
+Nah loh, passwordnya gak dicek tuh
+
+**SOLUSI**
+- Jangan pakai query manual ditulis dengan menggabungkan string
+- Pakai function `Execute` atau Query dengan parameter
