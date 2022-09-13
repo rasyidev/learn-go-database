@@ -93,3 +93,11 @@ Nah loh, passwordnya gak dicek tuh
 - Jangan lupa Close() setelah tidak digunakan. 
 - `statement.ExecContext()` untuk query tanpa return
 - `statement.QueryContext()` untuk query dengan return
+
+## Database Transaction
+- Secara default, semua perintah SQL yang dikirim menggunakan Go Lang otomatis commit (auto commit)
+- Fitur Transaction memungkinkan untuk mengatur transaksi commit ke dalam database
+- `(DB) Begin()`
+- `(Tx) Commit()` untuk melakukan commit
+- `(Tx) Rollback()` untuk membatalkan transaksi
+- Untuk eksekusi batch insert jauh lebih cepat menggunakan transaction daripada Exec biasa dan Exec Prepare Statement
