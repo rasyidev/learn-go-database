@@ -33,3 +33,24 @@
 - BOOLEAN -> bool
 - DATE, DATETIME, TIME, TIMESTAMP -> time.Time
 
+**Driver Go Lang secara default tidak support time.Time**
+Strategi:
+DATE, DATETIME, TIMESTAMP -> []byte -> parsing ke string -> time.Time (tapi ribet)
+setting  di driver golang parseDate=True pada url `dataSourceName`
+
+
+## Nullable Type
+- Driver Go lang tidak mengerti tipe database
+- Khusus kolom yang nullable, `rows.Scan` akan menjadi error, perlu dihandle
+- Error:
+
+```bash
+--- FAIL: TestPerintahSelectComplex (0.01s)
+panic: sql: Scan error on column index 2, name "email": converting NULL to string is unsupported [recovered]
+        panic: sql: Scan error on column index 2, name "email": converting NULL to string is unsupported
+```
+- Konversi otomatis untuk tipe database NULL tidak didukung oleh Driver MySQL Go Lang
+- Khusus tipe kolom nullable, perlu menggunakan tipe data yang ada dalam package `sql`
+
+**Tipe Data Nullable package `sql`**
+- string -> `database.sql.NullString`
