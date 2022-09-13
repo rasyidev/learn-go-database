@@ -74,3 +74,22 @@ Nah loh, passwordnya gak dicek tuh
 **SOLUSI**
 - Jangan pakai query manual ditulis dengan menggabungkan string
 - Pakai function `Execute` atau Query dengan parameter
+
+## Prepare Statement
+**Problem**
+- Saat melakukan batch insert (misalnya dari file spreadsheet) ke dalam database dengan query yang sama, hanya beda parameter, Query Statement akan dibuat sebanyak pengulangan batch inserternya.
+- Cocok untuk query yang menggunakan parameter
+
+**Tidak Menggunakan Prepare Statement**
+- Tidak dapat dipastikan menggunakan koneksi pool yang sama
+- Lambat
+
+**Menggunakan Prepare Statement**
+- Memastikan menggunakan koneksi pool yang sama (1 koneksi saja)
+- Cepat
+
+**Implementasi**
+- `(DB) PrepareContext(context, sqlQuery)`
+- Jangan lupa Close() setelah tidak digunakan. 
+- `statement.ExecContext()` untuk query tanpa return
+- `statement.QueryContext()` untuk query dengan return
