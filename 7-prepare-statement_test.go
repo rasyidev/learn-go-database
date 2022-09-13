@@ -24,30 +24,27 @@ func TestPrepareStatement(t *testing.T) {
 		email := "Punch" + strconv.Itoa(i) + "@rasyidev.id"
 		comment := "Comment ke-" + strconv.Itoa(i)
 
-		res, err := statement.ExecContext(ctx, email, comment)
+		_, err := statement.ExecContext(ctx, email, comment)
 		if err != nil {
 			panic(err.Error())
 		}
 
-		rowsAffected, _ := res.RowsAffected()
-		lastId, _ := res.LastInsertId()
+		// rowsAffected, _ := res.RowsAffected()
+		// lastId, _ := res.LastInsertId()
 
-		fmt.Println("Rows Affected\t:", rowsAffected)
-		fmt.Println("Last ID\t:", lastId)
+		// fmt.Println("Rows Affected\t:", rowsAffected)
+		// fmt.Println("Last ID\t:", lastId)
 	}
+	fmt.Println("Selesai mengeksekusi query")
 
 }
 
 /*
-Last ID : 1
-Rows Affected   : 1
-.....
-Last ID : 9999
-Rows Affected   : 1
-Last ID : 10000
---- PASS: TestPrepareStatement (12.19s)
+=== RUN   TestPrepareStatement
+Selesai mengeksekusi query
+--- PASS: TestPrepareStatement (5.99s)
 PASS
-ok      learn-go-database       12.246s
+ok      learn-go-database       6.042s
 */
 
 func TestWithoutPrepareStatement(t *testing.T) {
@@ -66,27 +63,24 @@ func TestWithoutPrepareStatement(t *testing.T) {
 		email := "Punch" + strconv.Itoa(i) + "@rasyidev.id"
 		comment := "Comment ke-" + strconv.Itoa(i)
 
-		res, err := statement.ExecContext(ctx, email, comment)
+		_, err := statement.ExecContext(ctx, email, comment)
 		if err != nil {
 			panic(err)
 		}
 
-		rowsAffected, _ := res.RowsAffected()
-		lastId, _ := res.LastInsertId()
-		fmt.Println("Rows Affected\t:", rowsAffected)
-		fmt.Println("Last ID\t:", lastId)
+		// rowsAffected, _ := res.RowsAffected()
+		// lastId, _ := res.LastInsertId()
+		// fmt.Println("Rows Affected\t:", rowsAffected)
+		// fmt.Println("Last ID\t:", lastId)
 	}
+	fmt.Println("Selesai mengeksekusi query")
 
 }
 
 /*
-Last ID : 1
-Rows Affected   : 1
-.....
-Last ID : 9999
-Rows Affected   : 1
-Last ID : 10000
---- PASS: TestPrepareStatement (35.93s)
+=== RUN   TestWithoutPrepareStatement
+Selesai mengeksekusi query
+--- PASS: TestWithoutPrepareStatement (6.13s)
 PASS
-ok      learn-go-database       35.974s
+ok      learn-go-database       6.178s
 */
