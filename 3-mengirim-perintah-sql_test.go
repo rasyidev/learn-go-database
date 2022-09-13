@@ -2,6 +2,7 @@ package learngodatabase
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
 	"testing"
 	"time"
@@ -69,10 +70,12 @@ func TestPerintahSelectComplex(t *testing.T) {
 
 	for rows.Next() {
 		var id int
-		var name, email string
+		var name string
+		var email sql.NullString
 		var balance int32
 		var rating float32
-		var birth_date, created_at time.Time
+		var birth_date sql.NullTime
+		var created_at time.Time
 		var married bool
 
 		err := rows.Scan(&id, &name, &email, &balance, &rating, &birth_date, &married, &created_at)
@@ -83,10 +86,25 @@ func TestPerintahSelectComplex(t *testing.T) {
 		fmt.Println("----------------------------------------------------------------------------")
 		fmt.Println("ID\t\t:", id)
 		fmt.Println("Name\t\t:", name)
-		fmt.Println("Email\t\t:", email)
+
+		// bisa pakai .String
+		if email.Valid {
+			fmt.Println("Email\t\t:", email.String)
+		} else {
+			fmt.Println("Email\t\t:", "NULL")
+		}
+
 		fmt.Println("Balance\t\t:", balance)
 		fmt.Println("Rating\t\t:", rating)
-		fmt.Println("Birth Date\t:", birth_date)
+
+		// Atau bisa pakei res := .Value(); res
+		if birth_date.Valid {
+			res, _ := birth_date.Value()
+			fmt.Println("Birth Date\t:", res)
+		} else {
+			fmt.Println("Birth Date\t:", "NULL")
+		}
+
 		fmt.Println("Maried\t\t:", married)
 		fmt.Println("Created At\t:", created_at)
 	}
