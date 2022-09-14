@@ -101,3 +101,12 @@ Nah loh, passwordnya gak dicek tuh
 - `(Tx) Commit()` untuk melakukan commit
 - `(Tx) Rollback()` untuk membatalkan transaksi
 - Untuk eksekusi batch insert jauh lebih cepat menggunakan transaction daripada Exec biasa dan Exec Prepare Statement
+
+## Repository Pattern
+- Jembatan antara logic aplikasi dengan semua perintah SQL di database
+- Use Entity / Model
+- Implement Repository Implementation (Interface)
+
+**Entity/Model**
+- Struct representasi tabel dan kolomnya
+- Return rows sebaiknya dikonversi menjadi struct entity/model sehingga tinggal menggunakan objectnya saja
