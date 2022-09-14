@@ -13,7 +13,7 @@ type commentRepositoryImpl struct {
 }
 
 func NewCommentRepository(db *sql.DB) CommentRepository {
-	return &commentRepositoryImpl{}
+	return &commentRepositoryImpl{DB: db}
 }
 
 func (repository *commentRepositoryImpl) Insert(ctx context.Context, comment entity.Comment) (entity.Comment, error) {
@@ -32,7 +32,7 @@ func (repository *commentRepositoryImpl) Insert(ctx context.Context, comment ent
 }
 
 func (repository *commentRepositoryImpl) FindById(ctx context.Context, Id int32) (entity.Comment, error) {
-	sqlQuery := "SELECT id, email, comment FROM comment WHERE id=? LIMIT 1"
+	sqlQuery := "SELECT id, email, comment FROM comments WHERE id=? LIMIT 1"
 	row, err := repository.DB.QueryContext(ctx, sqlQuery, Id)
 	comment := entity.Comment{}
 	if err != nil {
